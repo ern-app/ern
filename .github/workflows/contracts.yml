@@ -1,0 +1,52 @@
+name: contracts
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-skip:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.filter.outputs.run }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            run:
+              - ".github/workflows/contracts.yml"
+              - "contracts/**"
+              - "script/**"
+              - "foundry.toml"
+              - "remappings.txt"
+
+  forge-test:
+    needs: check-skip
+    if: needs.check-skip.outputs.run == 'true'
+    strategy:
+      fail-fast: true
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - run: forge soldeer install
+      - run: forge build --sizes
+      - run: forge test -vvv

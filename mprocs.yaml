@@ -1,0 +1,11 @@
+procs:
+  contracts:
+    cmd: ["./scripts/anvil-watch.sh"]
+  anvil:
+    cmd: ["anvil", "--host", "0.0.0.0"]
+  frontend:
+    cmd: ["npm", "run", "dev", "--workspace=frontend"]
+  bot:
+    cmd: ["./scripts/bot-watch.sh"]
+  yield-generator:
+    cmd: ["./scripts/generate-yield.sh"]

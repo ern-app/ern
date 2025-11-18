@@ -1,0 +1,36 @@
+[profile.default]
+src = "contracts"
+out = "out"
+libs = ["dependencies"]
+fs_permissions = [
+  { access = "read-write", path = "./activityRun.csv" },
+  { access = "read-write", path = "./activityWPQRun.csv" },
+  { access = "read-write", path = "./packages/wagmi/contracts/1.ts" },
+  { access = "read-write", path = "./packages/wagmi/contracts/31337.ts" },
+  { access = "read-write", path = "./packages/wagmi/contracts/11155111.ts" },
+  { access = "read-write", path = "./packages/wagmi/contracts/15628905.ts" },
+]
+
+[profile.deploy]
+skip = ['contracts/test/*', 'contracts/src/old/*']
+
+
+[soldeer]
+recursive_deps = true
+
+[profile.default.rpc_endpoints]
+mainnet = "${MAINNET_RPC_URL}"
+
+[dependencies]
+forge-std = "1.9.7"
+aave-v3-origin = { version = "3.3.0", git = "https://github.com/aave-dao/aave-v3-origin", rev = "312a899aaa9f7f4685d051d13185ada1902a2730" }
+"@openzeppelin-contracts" = "5.3.0"
+"@uniswap-v3-periphery" = "1.4.4"
+
+[lint]
+exclude_lints = [
+  "asm-keccak256",
+  "mixed-case-variable",
+  "mixed-case-function",
+  "erc20-unchecked-transfer",
+]

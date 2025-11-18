@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "quotes": "off",
+    "state-visibility": "error",
+    "func-name-mixedcase": "off"
+  },
+  "excludedFiles": ["**/test/**/*.sol", "**/script/**/*.sol"]
+}

@@ -1,0 +1,15 @@
+import { getAddress } from "viem";
+
+const contracts = {
+  ernUSDC: getAddress("0x226455A82E30Ff05E68B37b99C59e503104bA84B"),
+  ernUSDT: getAddress("0x87f0E6f65CCf64d6D504C9DB95F390d2aCb033B5"),
+  USDC: getAddress("0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"),
+  USDT: getAddress("0xdAC17F958D2ee523a2206206994597C13D831ec7"),
+  wBTC: getAddress("0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"),
+  oracleUSDC: getAddress("0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6"),
+  oracleUSDT: getAddress("0x3E7d1eAB13ad0104d2750B8863b489D65364e32D"),
+  oracleWBTC: getAddress("0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c"),
+  multicall: getAddress("0x0000000000000000000000000000000000000000"),
+};
+
+export default contracts;
