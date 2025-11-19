@@ -75,7 +75,7 @@ export default function Footer() {
                     Github
                   </Link>
                   <Link
-                    href="https://github.com/ern-app/ern/blob/main/audits/[CREED]%20Ern%20Audit%20and%20Mitigations%20(Aug%202025%20to%20Nov%202025).pdf"
+                    href="https://github.com/ern-app/ern/blob/main/audits/CREED-2025.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-black/70 opacity-90 transition-all duration-300 hover:text-black/85"
