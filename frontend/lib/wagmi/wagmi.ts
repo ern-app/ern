@@ -33,7 +33,7 @@ const getChains = () => {
 const chains = getChains();
 
 const getTransports = () => {
-  const transports: Record<number, ReturnType<typeof http>> = {};
+  const transports: Record<number, ReturnType<typeof http> | ReturnType<typeof fallback>> = {};
 
   for (const chain of chains) {
     if (chain.id === mainnet.id) {
