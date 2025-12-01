@@ -30,28 +30,37 @@ const getChains = () => {
   return [foundryExtended, ethuiStackFoundry] as const;
 };
 
-const getTransport = () => {
-  if (vercelEnv === "production") {
-    return fallback([
-      http("https://eth.llamarpc.com"),
-      webSocket("wss://eth.drpc.org"),
-      http("https://ethereum-rpc.publicnode.com"),
-    ]);
+const chains = getChains();
+
+const getTransports = () => {
+  const transports: Record<number, ReturnType<typeof http>> = {};
+
+  for (const chain of chains) {
+    if (chain.id === mainnet.id) {
+      transports[chain.id] = fallback([
+        http("https://eth.llamarpc.com"),
+        webSocket("wss://eth.drpc.org"),
+        http("https://ethereum-rpc.publicnode.com"),
+      ]);
+    } else {
+      transports[chain.id] = http();
+    }
   }
 
-  return http();
+  return transports;
 };
 
-const chains = getChains();
+const transports = getTransports();
 
 export const wagmiConfig = getDefaultConfig({
   appName: "Ern",
   projectId,
   chains,
+  transports,
   ssr: true,
 });
 
 export const publicClient = createPublicClient({
   chain: chains[0],
-  transport: getTransport(),
+  transport: transports[chains[0].id],
 });
